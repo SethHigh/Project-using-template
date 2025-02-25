@@ -1,0 +1,78 @@
+.banner {
+    background-color: rgb(7, 0, 101);
+    padding: 20px;
+    color: rgb(4, 183, 223);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  
+    width: 100%;
+  }
+  
+  .navbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .button {
+    margin-top: 20px;
+    padding: 8px 12px;
+    background-color: rgb(4, 183, 223);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  .button:hover {
+    background-color: #411d79;
+  }
+  
+  .banner_favorites {
+    background-color: rgb(79, 0, 79);
+    padding: 20px;
+    color: rgb(4, 183, 223);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  
+    width: 100%;
+  }
+  
+  .button_login {
+    background-color: rgb(4, 183, 223);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 14px;
+    width: 100%;
+    height: 25%;
+    align-items: center;
+    align-self: center;
+  }
+  
+  .box {
+    color: rgb(4, 183, 223);
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 5%;
+  }
+  
+  .title_login {
+    color: rgb(4, 183, 223);
+    justify-content: center;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 15%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }

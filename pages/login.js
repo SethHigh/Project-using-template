@@ -1,16 +1,10 @@
-import Head from "next/head";
+
 import Link from "next/link";
 import styles from "../styles/Home.module.css"; 
 
 export default function login() {
     return (
     <>
-        <Head>
-          <title>Login page</title>
-          <meta name="description" content="Login to account" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
         <h2 className={styles.title_login}>Login to account</h2>
         <div className={styles.box}>
         <div className="container-sm">

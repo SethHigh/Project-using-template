@@ -5,6 +5,7 @@ import { useStateContext } from '@/context/StateContext'
 import { isEmailInUse, register} from '@/backend/Auth'
 import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
+
 const Signup = () => {
 
   const { user, setUser } = useStateContext()
@@ -30,8 +31,8 @@ const Signup = () => {
 
   async function handleSignup(){
     const isValidEmail = await validateEmail()
-    // console.log('isValidEmail', isValidEmail)
-    // if(!isValidEmail){ return; }
+    console.log('isValidEmail', isValidEmail)
+    if(!isValidEmail){ return; }
     
     try{
         await register(email, password, setUser)

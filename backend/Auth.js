@@ -23,4 +23,11 @@ export async function register(email, password, setUser) {
     }
   }
 
-  
+  export async function login(email, password, setUser) {
+    try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password)
+        return { user: userCredential.user, error: null } // Return user instead of setting state
+      } catch (error) {
+        return { user: null, error: error.message }
+      }
+  }

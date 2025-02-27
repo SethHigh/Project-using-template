@@ -12,8 +12,8 @@ export default function Home() {
       <div>
       <header className={styles.banner}>
         <div className={styles.navbar}>
-          <Link href="/favorites">
-                <button className={styles.button}>Favorites</button>
+          <Link href="auth/signup">
+                <button className={styles.button}>sign up</button>
           </Link>
           <Link href="auth/login">
                 <button className={styles.button}>Login</button>

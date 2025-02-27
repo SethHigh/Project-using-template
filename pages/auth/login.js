@@ -5,7 +5,6 @@ import { useStateContext } from '@/context/StateContext'
 import {login, isEmailInUse} from '@/backend/Auth'
 import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
-
 const Login = () => {
 
   const { user, setUser } = useStateContext()
@@ -14,10 +13,23 @@ const Login = () => {
 
   const router = useRouter()
 
+  
 
   async function handleLogin(){
-
-  }
+      const { user, error } = await login(email, password)
+  
+      if (error) {
+        setError(error)
+        console.error('Login error:', error)
+        return
+      }
+  
+      setUser(user)
+      console.log('Login successful:', user)
+  
+      router.push('/')
+    }
+  
 
 
   return (

@@ -5,11 +5,13 @@ import { useStateContext } from '@/context/StateContext'
 import {login, isEmailInUse} from '@/backend/Auth'
 import Link from 'next/link'
 import Navbar from '@/components/Dashboard/Navbar'
+
 const Login = () => {
 
   const { user, setUser } = useStateContext()
   const [ email, setEmail ] = useState('')
   const [ password, setPassword ] = useState('')
+  const [error, setError] = useState(null);
 
   const router = useRouter()
 

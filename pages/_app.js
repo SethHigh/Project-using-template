@@ -2,14 +2,15 @@ import Head from 'next/head' //use instead of head
 import { StateContext } from "@/context/StateContext"
 import { createGlobalStyle } from 'styled-components'
 
-export const GlobalStyle = createGlobalStyle`
-  * 
-  {
+const GlobalStyle = createGlobalStyle`
+  body {
+    background-color: black;
+    color: white;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
   }
-`
+`;
 
 export default function App({ Component, pageProps }) {
   return (

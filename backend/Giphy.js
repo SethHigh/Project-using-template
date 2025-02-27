@@ -1,7 +1,7 @@
 //searches for gifs using the Giphy API
-export async function fetchGifs(query) {
+export async function fetchGifs(query, offset = 0, limit = 10) {
     const API_KEY = "JAhp1YKsFoyR9mZ7I02lxYsS1LTCCtqT"
-    const URL = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=10`
+    const URL = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=${limit}&offset=${offset}`
   
     try {
       const response = await fetch(URL)
@@ -12,4 +12,4 @@ export async function fetchGifs(query) {
       console.error('Error fetching GIFs:', error)
       return []
     }
-  }
+}

@@ -13,14 +13,18 @@ import { useState } from 'react'
 //creates home page
 export default function Home() {
   const { user } = useStateContext()
-  const [searchQuery, setSearchQuerys] = useState('')
+  const [searchQuery, setSearchQuery] = useState('')
   const [gifs, setGifs] = useState([])
+  const [offset, setOffset] = useState(0)
+  const limit = 3;
 
-  const handleSearch = async () => {
-    if (!searchQuery) return
-    const results = await fetchGifs(searchQuery)
-    setGifs(results)
-  }
+  const handleSearch = async (newOffset = 0) => {
+    if (!searchQuery) return;
+
+    const results = await fetchGifs(searchQuery, newOffset, limit);
+    setGifs(results);
+    setOffset(newOffset);
+  };
 
   //function to sign out
   const handleSignOut = async () => {
@@ -70,6 +74,24 @@ export default function Home() {
               <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
             ))}
         </div>
+
+
+        <div className={styles.pagination}>
+          <button 
+            onClick={() => handleSearch(offset - limit)} 
+            className={styles.button} 
+            disabled={offset === 0}
+          >
+            ◀ Previous
+          </button>
+          <button 
+            onClick={() => handleSearch(offset + limit)} 
+            className={styles.button}
+          >
+            Next ▶
+          </button>
+        </div>
+
 
       </div>
     </>

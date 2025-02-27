@@ -2,6 +2,7 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css"; 
 
+//page for looking through favorite gifs
 export default function Home() {
   return (
     <>

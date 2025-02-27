@@ -8,10 +8,11 @@ import { useStateContext } from '@/context/StateContext'
 import { auth } from '@/backend/Firebase'
 import { signOut } from 'firebase/auth'
 
-
+//creates home page
 export default function Home() {
   const { user } = useStateContext()
 
+  //function to sign out
   const handleSignOut = async () => {
     try {
       await signOut(auth)
@@ -20,7 +21,7 @@ export default function Home() {
       console.error('Error signing out:', error)
     }
   }
-
+  //return of website design
   return (
     <>
       <div>

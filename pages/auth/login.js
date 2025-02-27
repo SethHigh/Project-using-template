@@ -14,7 +14,7 @@ const Login = () => {
   const router = useRouter()
 
   
-
+ //calls upon login and changes the user state
   async function handleLogin(){
       const { user, error } = await login(email, password)
   

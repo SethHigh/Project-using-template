@@ -2,13 +2,13 @@ import { auth } from "./Firebase";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, fetchSignInMethodsForEmail } from "firebase/auth";
 
 
-
+//checks if email is in use already
 export async function isEmailInUse(email) {
     const auth = getAuth();
     const signInMethods = await fetchSignInMethodsForEmail(auth, email);
     return signInMethods.length > 0;
 }
-
+//calls upon createuserwithemailandpassword to create a new user
 export async function register(email, password, setUser) {
     try {
       const auth = getAuth();
@@ -22,7 +22,7 @@ export async function register(email, password, setUser) {
       throw error;
     }
   }
-
+  //calls upon signinwithemailandpassword to check with firebase for login
   export async function login(email, password, setUser) {
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password)

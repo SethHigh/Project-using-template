@@ -29,12 +29,16 @@ const Login = () => {
   
       router.push('/')
     }
-  
-
+    async function gohome(){
+      router.push('/')
+    }
+    async function gosignup(){
+      router.push('/auth/signup')
+    }
 
   return (
     <>
-    <Navbar/>
+
     <Section>
         <Header>Login</Header>
         <InputTitle>Email</InputTitle>
@@ -45,6 +49,8 @@ const Login = () => {
         <UserAgreementText>By signing in, you automatically agree to our <UserAgreementSpan href='/legal/terms-of-use' rel="noopener noreferrer" target="_blank"> Terms of Use</UserAgreementSpan> and <UserAgreementSpan href='/legal/privacy-policy' rel="noopener noreferrer" target="_blank">Privacy Policy.</UserAgreementSpan></UserAgreementText>
 
         <MainButton onClick={handleLogin}>Login</MainButton>
+        <MainButton onClick={gosignup}>go sign up</MainButton>
+        <MainButton onClick={gohome}>go back</MainButton>
 
     </Section>
     </>
@@ -52,47 +58,74 @@ const Login = () => {
 }
 
 const Section = styled.section`
+  background-color: rgb(7, 0, 101);
+  padding: 20px;
+  color: rgb(4, 183, 223);
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 `;
 
 const Header = styled.h1`
-  font-size: 24px; /* Adjusted for better scalability */
+  color: rgb(4, 183, 223);
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 15%;
+  width: 100%;
+  text-align: center;
 `;
 
 const Input = styled.input`
   font-size: 16px;
-
+  background-color: white;
+  color: black;
+  padding: 10px;
+  border: 1px solid rgb(4, 183, 223);
+  border-radius: 5px;
+  width: 80%;
+  margin-bottom: 10px;
+  text-align: center;
 `;
 
-const InputTitle = styled.label` /* Changed to label for semantics */
+const InputTitle = styled.label`
   font-size: 14px;
-  color: #666;
+  color: rgb(4, 183, 223);
+  margin-bottom: 5px;
 `;
 
 const MainButton = styled.button`
-  background-color: #007bff;
+  padding: 8px 12px;
+  background-color: rgb(4, 183, 223);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-top: 5px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+
   &:hover {
-    background-color: #0056b3;
+    background-color: #411d79;
   }
 `;
 
 const UserAgreementText = styled.p`
   font-size: 12px;
-  color: #666;
-  margin-top: 20px;
   text-align: center;
+  color: rgb(4, 183, 223);
+  margin-top: 10px;
+  width: 80%;
 `;
 
 const UserAgreementSpan = styled(Link)`
-  color: #007bff;
+  color: rgb(4, 183, 223);
+  text-decoration: underline;
   cursor: pointer;
-  &:hover {
-    text-decoration: underline;
-  }
-  &:not(:last-of-type)::after {
-    content: ', '; /* Adds comma between links */
-  }
 `;
+
 
 
 export default Login

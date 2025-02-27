@@ -7,10 +7,20 @@ import styles from "../styles/Home.module.css";
 import { useStateContext } from '@/context/StateContext'
 import { auth } from '@/backend/Firebase'
 import { signOut } from 'firebase/auth'
+import { fetchGifs } from '@/backend/Giphy'
+import { useState } from 'react'
 
 //creates home page
 export default function Home() {
   const { user } = useStateContext()
+  const [searchQuery, setSearchQuerys] = useState('')
+  const [gifs, setGifs] = useState([])
+
+  const handleSearch = async () => {
+    if (!searchQuery) return
+    const results = await fetchGifs(searchQuery)
+    setGifs(results)
+  }
 
   //function to sign out
   const handleSignOut = async () => {
@@ -45,11 +55,22 @@ export default function Home() {
             </>
           )}
           <h1>Search Gifs</h1>
-          <input type="text" id="searchBox" placeholder="Search for GIFs"></input>
-          <button id="searchButton" className={styles.button}>Search</button>
-          <div id="gifContainer"></div>
+          <input 
+              type="text" 
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search for GIFs"
+            />
+            <button onClick={handleSearch} className={styles.button}>Search</button>
         </div>
       </header>
+
+        <div className={styles.gifContainer}>
+            {gifs.map((gif) => (
+              <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
+            ))}
+        </div>
+
       </div>
     </>
   )

@@ -9,6 +9,7 @@ import { auth } from '@/backend/Firebase'
 import { signOut } from 'firebase/auth'
 import { fetchGifs } from '@/backend/Giphy'
 import { useState } from 'react'
+import { favoritingGif } from '@/backend/Database'
 
 //creates home page
 export default function Home() {
@@ -40,6 +41,12 @@ export default function Home() {
       console.error('Error signing out:', error)
     }
   }
+
+  //calls upon favoriting gif
+  const handleFavoritingGif = async (gifId) => {
+    await favoritingGif(gifId); // Save GIF to Firestore
+  };
+
   //return of website design
   return (
     <>
@@ -74,13 +81,21 @@ export default function Home() {
         </div>
       </header>
 
-        <div className={styles.gif_container}>
+      <div className={styles.gif_container}>
         {gifs.map((gif) => (
-            <div key={gif.id} className={styles.gifItem}>
-              <img src={gif.images.fixed_height.url} alt={gif.title} />
-            </div>
-          ))}
-        </div>
+          <div key={gif.id} className={styles.gifItem}>
+            <img src={gif.images.fixed_height.url} alt={gif.title} />
+        {user && (
+          <button 
+            onClick={() => handleFavoritingGif(gif.id)} 
+            className={styles.save_button}
+          >
+            favorite GIF
+          </button>
+        )}
+      </div>
+    ))}
+  </div>
 
 
         <div className={styles.browse_buttons}>

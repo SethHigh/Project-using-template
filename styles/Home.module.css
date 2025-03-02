@@ -77,9 +77,24 @@
     align-items: center;
   }
 
-  .gifContainer {
+  .gif_container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    padding: 20px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+  }
+  
+  .gif {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .browse_buttons {
     display: flex;
     justify-content: center;
+    width: 100%;
     align-items: center;
-    margin-top: 20px;
   }

@@ -74,14 +74,16 @@ export default function Home() {
         </div>
       </header>
 
-        <div className={styles.gifContainer}>
-            {gifs.map((gif) => (
-              <img key={gif.id} src={gif.images.fixed_height.url} alt={gif.title} />
-            ))}
+        <div className={styles.gif_container}>
+        {gifs.map((gif) => (
+            <div key={gif.id} className={styles.gifItem}>
+              <img src={gif.images.fixed_height.url} alt={gif.title} />
+            </div>
+          ))}
         </div>
 
 
-        <div className={styles.pagination}>
+        <div className={styles.browse_buttons}>
           <button 
             onClick={() => handleSearch(Number(offset) - Number(limit))} 
             className={styles.button} 

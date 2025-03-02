@@ -22,12 +22,12 @@ const Login = () => {
   
       if (error) {
         setError(error)
-        console.error('Login error:', error)
+        console.error('error:', error)
         return
       }
   
       setUser(user)
-      console.log('Login successful:', user)
+      console.log('Logged in ', user)
   
       router.push('/')
     }
@@ -68,7 +68,7 @@ const Section = styled.section`
   align-items: center;
   text-align: center;
   width: 100%;
-`;
+`
 
 const Header = styled.h1`
   color: rgb(4, 183, 223);
@@ -77,25 +77,24 @@ const Header = styled.h1`
   margin-top: 15%;
   width: 100%;
   text-align: center;
-`;
+`
 
 const Input = styled.input`
   font-size: 16px;
   background-color: white;
   color: black;
   padding: 10px;
-  border: 1px solid rgb(4, 183, 223);
   border-radius: 5px;
   width: 80%;
   margin-bottom: 10px;
   text-align: center;
-`;
+`
 
 const InputTitle = styled.label`
   font-size: 14px;
   color: rgb(4, 183, 223);
   margin-bottom: 5px;
-`;
+`
 
 const MainButton = styled.button`
   padding: 8px 12px;
@@ -112,7 +111,7 @@ const MainButton = styled.button`
   &:hover {
     background-color: #411d79;
   }
-`;
+`
 
 const UserAgreementText = styled.p`
   font-size: 12px;
@@ -120,13 +119,13 @@ const UserAgreementText = styled.p`
   color: rgb(4, 183, 223);
   margin-top: 10px;
   width: 80%;
-`;
+`
 
 const UserAgreementSpan = styled(Link)`
   color: rgb(4, 183, 223);
   text-decoration: underline;
   cursor: pointer;
-`;
+`
 
 
 

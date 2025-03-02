@@ -1,5 +1,5 @@
 //searches for gifs using the Giphy API
-export async function fetchGifs(query, offset = 0, limit = 10) {
+export async function fetchGifs(query, offset = 0, limit = 4) {
     const API_KEY = "JAhp1YKsFoyR9mZ7I02lxYsS1LTCCtqT"
     const URL = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=${query}&limit=${limit}&offset=${offset}`
   

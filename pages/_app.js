@@ -7,10 +7,8 @@ const GlobalStyle = createGlobalStyle`
     background-color: black;
     color: white;
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
   }
-`;
+`
 
 export default function App({ Component, pageProps }) {
   return (

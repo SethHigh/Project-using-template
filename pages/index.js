@@ -16,14 +16,19 @@ export default function Home() {
   const [searchQuery, setSearchQuery] = useState('')
   const [gifs, setGifs] = useState([])
   const [offset, setOffset] = useState(0)
-  const limit = 3;
+  const limit = 4;
 
+
+
+  //function to get gifs from Giphy API
   const handleSearch = async (newOffset = 0) => {
     if (!searchQuery) return;
 
     const results = await fetchGifs(searchQuery, newOffset, limit);
     setGifs(results);
+    console.log(newOffset);
     setOffset(newOffset);
+    console.log(offset);
   };
 
   //function to sign out
@@ -78,14 +83,14 @@ export default function Home() {
 
         <div className={styles.pagination}>
           <button 
-            onClick={() => handleSearch(offset - limit)} 
+            onClick={() => handleSearch(Number(offset) - Number(limit))} 
             className={styles.button} 
             disabled={offset === 0}
           >
             ◀ Previous
           </button>
           <button 
-            onClick={() => handleSearch(offset + limit)} 
+            onClick={() => handleSearch(Number(offset) + Number(limit) || 4)} 
             className={styles.button}
           >
             Next ▶

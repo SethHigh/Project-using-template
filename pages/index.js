@@ -36,7 +36,7 @@ export default function Home() {
 
     // get suggestions for search from duckduckgo
     const fetchSuggestions = async (query) => {
-      if (!query || query.length < 2) {
+      if (!query) {
         setSuggestions([]);
         return;
       }
@@ -44,20 +44,13 @@ export default function Home() {
       try {
         const response = await fetch(`/api/suggestions?query=${encodeURIComponent(query)}`);
         const data = await response.json();
-    
-        if (data.RelatedTopics) {
-          const suggestionList = data.RelatedTopics
-            .map((item) => item.Text)
-            .filter(Boolean)
-            .slice(0, 5); // Limit to 5 suggestions
-          setSuggestions(suggestionList);
-        }
+        const cutSuggestions = data.slice(0, 5);
+        console.log("Fetched:", cutSuggestions);
+        setSuggestions(cutSuggestions);
       } catch (error) {
-        console.error("Error fetching search suggestions:", error);
-        setSuggestions([]);
+        console.error("Error:", error);
       }
     };
-
 
   //function to sign out
   const handleSignOut = async () => {
@@ -71,7 +64,7 @@ export default function Home() {
 
   //calls upon favoriting gif
   const handleFavoritingGif = async (gifId) => {
-    await favoritingGif(gifId); // Save GIF to Firestore
+    await favoritingGif(gifId);
   };
 
   //return of website design
@@ -123,7 +116,6 @@ export default function Home() {
                       onClick={() => {
                         setSearchQuery(suggestion);
                         setSuggestions([]);
-                        handleSearch(0, suggestion);
                       }}
                     >
                       {suggestion}

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css"; 
 import { useEffect, useState } from "react";
-import { getfavoritedGifs, removeFavoriteGif } from "@/backend/Database";
+import { getFavoritedGifs, removeFavoriteGif } from "@/backend/Database";
 import { useStateContext } from "@/context/StateContext";
 import {auth} from '@/backend/Firebase'
 
@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchFavorites() {
       if (user) {
-        const gifIds = await getfavoritedGifs(user.uid);
+        const gifIds = await getFavoritedGifs(user.uid);
         
         if (gifIds.length > 0) {
           try {
@@ -76,19 +76,19 @@ export default function Home() {
           <h1>Browse Favorites</h1>
         </header>
 
-        <div className={styles.gif_container}>
-        {favoritedGifs.map((gif) => (
-          <div key={gif.id} className={styles.gif}>
+        <div className={styles.gif_container_favorites}>
+          {favoritedGifs.map((gif) => (
+          <div key={gif.id} className={styles.gif_favorites}>
             <img src={gif.url} alt={gif.title} />
-            <button 
-              className={styles.GIF_button} 
-              onClick={() => handleRemoveFavorite(gif.id)}
-            >
+              <button 
+                className={styles.GIF_button} 
+                onClick={() => handleRemoveFavorite(gif.id)}
+              >
               Remove
-            </button>
+              </button>
           </div>
-        ))}
-      </div>
+    ))}
+        </div>
 
     </>
   );

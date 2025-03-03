@@ -83,19 +83,19 @@ export default function Home() {
 
       <div className={styles.gif_container}>
         {gifs.map((gif) => (
-          <div key={gif.id} className={styles.gifItem}>
-            <img src={gif.images.fixed_height.url} alt={gif.title} />
+        <div key={gif.id} className={styles.gif}>
+        <img src={gif.images.fixed_height.url} alt={gif.title} />
         {user && (
-          <button 
-            onClick={() => handleFavoritingGif(gif.id)} 
-            className={styles.GIF_button}
-          >
-            favorite GIF
-          </button>
-        )}
-      </div>
-    ))}
-  </div>
+        <button 
+          onClick={() => handleFavoritingGif(gif.id)} 
+          className={styles.GIF_button}
+        >
+          Favorite GIF
+        </button>
+      )}
+    </div>
+  ))}
+</div>
 
 
         <div className={styles.browse_buttons}>

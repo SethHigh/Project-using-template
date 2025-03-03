@@ -80,7 +80,7 @@
   .gif_container {
     display: flex;
     gap: 16px;
-    justify-content: center;
+    justify-content: space-between;
     padding: 20px;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -88,8 +88,10 @@
   }
   
   .gif {
-    padding: 10px;
+    width: fit-content;
+    border: 2px solid rgb(7, 0, 101);
     border-radius: 8px;
+    padding: 8px;
   }
 
   .browse_buttons {
@@ -99,10 +101,36 @@
     align-items: center;
   }
 
+  .gif img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .GIF_button {
     background-color: rgb(4, 183, 223);
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 14px;
-    width: 25%;
+    width: 100%;
+    padding: 8px;
+    text-align: center;;
+  }
+
+  .gif_container_favorites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: space-between;
+    padding: 20px;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    width: 100%;
+  }
+
+  .gif_favorites{
+    width: fit-content;
+    border: 2px solid rgb(79, 0, 79);
+    border-radius: 8px;
+    padding: 8px;
   }

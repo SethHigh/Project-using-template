@@ -16,6 +16,7 @@ export const favoritingGif = async (gifId) => {
   }
 };
 
+//pull favorited Gifs from database
 export const getfavoritedGifs = async () => {
     const user = auth.currentUser;
   

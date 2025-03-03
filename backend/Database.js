@@ -6,12 +6,28 @@ import { auth } from "./Firebase";
 export const favoritingGif = async (gifId) => {
   const user = auth.currentUser;
 
-  const userGifRef = collection(database, "users", user.uid, "savedGifs");
+  const userGifRef = collection(database, "users", user.uid, "favoritedGifs");
 
   try {
     await addDoc(userGifRef, { gifId, timestamp: new Date() });
-    console.log("GIF saved successfully!");
+    console.log("GIF favorited successfully!");
   } catch (error) {
-    console.error("Error saving GIF:", error);
+    console.error("Error: ", error);
   }
 };
+
+export const getfavoritedGifs = async () => {
+    const user = auth.currentUser;
+  
+    const userGifRef = collection(database, "users", user.uid, "favoritedGifs");
+  
+    try {
+      const querySnapshot = await getDocs(userGifRef);
+      const favoritedGifs = querySnapshot.docs.map(doc => doc.data().gifId);
+      console.log("favorited:", favoritedGifs);
+      return favoritedGifs;
+    } catch (error) {
+      console.error("Error:", error);
+      return [];
+    }
+  };

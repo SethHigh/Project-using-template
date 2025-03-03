@@ -18,6 +18,7 @@ export default function Home() {
   const [gifs, setGifs] = useState([])
   const [offset, setOffset] = useState(0)
   const limit = 4;
+  const [suggestions, setSuggestions] = useState([]);
 
 
 
@@ -30,7 +31,33 @@ export default function Home() {
     console.log(newOffset);
     setOffset(newOffset);
     console.log(offset);
+    setSuggestions([]);
   };
+
+    // get suggestions for search from duckduckgo
+    const fetchSuggestions = async (query) => {
+      if (!query || query.length < 2) {
+        setSuggestions([]);
+        return;
+      }
+    
+      try {
+        const response = await fetch(`/api/suggestions?query=${encodeURIComponent(query)}`);
+        const data = await response.json();
+    
+        if (data.RelatedTopics) {
+          const suggestionList = data.RelatedTopics
+            .map((item) => item.Text)
+            .filter(Boolean)
+            .slice(0, 5); // Limit to 5 suggestions
+          setSuggestions(suggestionList);
+        }
+      } catch (error) {
+        console.error("Error fetching search suggestions:", error);
+        setSuggestions([]);
+      }
+    };
+
 
   //function to sign out
   const handleSignOut = async () => {
@@ -71,15 +98,42 @@ export default function Home() {
             </>
           )}
           <h1>Search Gifs</h1>
-          <input 
-              type="text" 
-              value={searchQuery} 
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search for GIFs"
-            />
-            <button onClick={handleSearch} className={styles.button}>Search</button>
-        </div>
-      </header>
+          <div className={styles.search_container}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  fetchSuggestions(e.target.value);
+                }}
+                placeholder="Search for GIFs"
+                className={styles.search_input}
+              />
+              <button
+                onClick={() => handleSearch(0, searchQuery)}
+                className={styles.button}
+              >
+                Search
+              </button>
+              {suggestions.length > 0 && (
+                <ul className={styles.suggestions}>
+                  {suggestions.map((suggestion, index) => (
+                    <li
+                      key={index}
+                      onClick={() => {
+                        setSearchQuery(suggestion);
+                        setSuggestions([]);
+                        handleSearch(0, suggestion);
+                      }}
+                    >
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </header>
 
       <div className={styles.gif_container}>
         {gifs.map((gif) => (

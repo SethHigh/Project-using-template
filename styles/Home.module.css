@@ -134,3 +134,35 @@
     border-radius: 8px;
     padding: 8px;
   }
+
+  .search_container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .search_input {
+    width: 250px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .suggestions {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    width: 100%;
+  }
+  
+  .suggestions li {
+    padding: 8px;
+    cursor: pointer;
+    color: black;
+  }
+  
+  .suggestions li:hover {
+    background: #eee;
+  }

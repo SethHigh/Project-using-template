@@ -1,4 +1,4 @@
-import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc } from "firebase/firestore"
+import { doc, setDoc, getDoc, getDocs, collection, query, where, addDoc, deleteDoc } from "firebase/firestore"
 import { database } from "./Firebase"
 import { auth } from "./Firebase";
 
@@ -30,5 +30,24 @@ export const getfavoritedGifs = async () => {
     } catch (error) {
       console.error("Error:", error);
       return [];
+    }
+  };
+
+
+//remove favorite gif from database
+export const removeFavoriteGif = async (userId, gifId) => {
+    try {
+      const userGifRef = collection(database, "users", userId, "favoritedGifs");
+
+      const q = query(userGifRef, where("gifId", "==", gifId));
+      const querySnapshot = await getDocs(q);
+
+      querySnapshot.forEach(async (docSnap) => {
+        await deleteDoc(docSnap.ref);
+        console.log(`removed: ${gifId}`);
+      });
+  
+    } catch (error) {
+      console.error("Error removing:", error);
     }
   };

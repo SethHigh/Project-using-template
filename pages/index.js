@@ -88,7 +88,7 @@ export default function Home() {
         {user && (
           <button 
             onClick={() => handleFavoritingGif(gif.id)} 
-            className={styles.save_button}
+            className={styles.GIF_button}
           >
             favorite GIF
           </button>

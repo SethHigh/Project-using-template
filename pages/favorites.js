@@ -1,7 +1,7 @@
 import Link from "next/link";
 import styles from "../styles/Home.module.css"; 
 import { useEffect, useState } from "react";
-import { getfavoritedGifs } from "@/backend/Database";
+import { getfavoritedGifs, removeFavoriteGif } from "@/backend/Database";
 import { useStateContext } from "@/context/StateContext";
 import {auth} from '@/backend/Firebase'
 
@@ -54,6 +54,19 @@ export default function Home() {
   }, [user]);
 
 
+  //removes favorite gif
+  const handleRemoveFavorite = async (gifId) => {
+    if (!user) return;
+
+    try {
+      await removeFavoriteGif(user.uid, gifId); // Remove from Firebase
+      setFavoritedGifs((prevGifs) => prevGifs.filter((gif) => gif.id !== gifId)); // Update UI
+    } catch (error) {
+      console.error("Error removing GIF:", error);
+    }
+  };
+
+
   return (
     <>
       <header className={styles.banner_favorites}>
@@ -64,15 +77,17 @@ export default function Home() {
         </header>
 
         <div className={styles.gif_container}>
-        {favoritedGifs.length > 0 ? (
-          favoritedGifs.map((gif) => (
-            <div key={gif.id} className={styles.gifItem}>
-              <img src={gif.url} alt={gif.title} />
-            </div>
-          ))
-        ) : (
-          <p>No favorite GIFs found.</p>
-        )}
+        {favoritedGifs.map((gif) => (
+          <div key={gif.id} className={styles.gif}>
+            <img src={gif.url} alt={gif.title} />
+            <button 
+              className={styles.GIF_button} 
+              onClick={() => handleRemoveFavorite(gif.id)}
+            >
+              Remove
+            </button>
+          </div>
+        ))}
       </div>
 
     </>

@@ -99,6 +99,7 @@
     justify-content: center;
     width: 100%;
     align-items: center;
+    
   }
 
   .gif img {
@@ -135,6 +136,12 @@
     padding: 8px;
   }
 
+  .gif_favorites img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .search_container {
     position: relative;
     display: inline-block;
@@ -165,4 +172,20 @@
   
   .suggestions li:hover {
     background: #eee;
+  }
+
+  .button_move {
+    width: 15%;
+    margin-top: 20px;
+    padding: 8px 12px;
+    background-color: rgb(4, 183, 223);
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+
+  .browse_buttons button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }

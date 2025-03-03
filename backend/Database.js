@@ -8,6 +8,14 @@ export const favoritingGif = async (gifId) => {
 
   const userGifRef = collection(database, "users", user.uid, "favoritedGifs");
 
+  const q = query(userGifRef, where("gifId", "==", gifId));
+  const queryCheck = await getDocs(q);
+
+  if (!queryCheck.empty) {
+    console.log("GIF is already favorited!");
+    return;
+  }
+
   try {
     await addDoc(userGifRef, { gifId, timestamp: new Date() });
     console.log("GIF favorited successfully!");

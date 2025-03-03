@@ -10,6 +10,8 @@ import { signOut } from 'firebase/auth'
 import { fetchGifs } from '@/backend/Giphy'
 import { useState } from 'react'
 import { favoritingGif } from '@/backend/Database'
+import { useRouter } from "next/router";
+
 
 //creates home page
 export default function Home() {
@@ -19,7 +21,8 @@ export default function Home() {
   const [offset, setOffset] = useState(0)
   const limit = 4;
   const [suggestions, setSuggestions] = useState([]);
-
+  const router = useRouter();
+  const [clickedButtons, setClickedButtons] = useState({});
 
 
   //function to get gifs from Giphy API
@@ -62,6 +65,12 @@ export default function Home() {
     }
   }
 
+  //disables favoriting gif again
+  const handleClick = (gifId) => {
+    setClickedButtons((prev) => ({ ...prev, [gifId]: true }));
+    handleFavoritingGif(gifId);
+  };
+
   //calls upon favoriting gif
   const handleFavoritingGif = async (gifId) => {
     await favoritingGif(gifId);
@@ -75,9 +84,7 @@ export default function Home() {
         <div className={styles.navbar}>
         {user ? (
               <>
-                <Link href="/favorites">
-                  <button className={styles.button}>Favorites</button>
-                </Link>
+                  <button onClick={() => router.push("/favorites")} className={styles.button}>Favorites</button>
                 <button onClick={handleSignOut} className={styles.button}>Sign Out</button>
               </>
             ) : (
@@ -132,12 +139,13 @@ export default function Home() {
         <div key={gif.id} className={styles.gif}>
         <img src={gif.images.fixed_height.url} alt={gif.title} />
         {user && (
-        <button 
-          onClick={() => handleFavoritingGif(gif.id)} 
-          className={styles.GIF_button}
-        >
-          Favorite GIF
-        </button>
+          <button 
+            onClick={() => handleClick(gif.id)} 
+            className={styles.GIF_button} 
+            disabled={clickedButtons[gif.id]}
+          >
+            {clickedButtons[gif.id] ? "Favorited!" : "Favorite"}
+          </button>
       )}
     </div>
   ))}
@@ -147,14 +155,14 @@ export default function Home() {
         <div className={styles.browse_buttons}>
           <button 
             onClick={() => handleSearch(Number(offset) - Number(limit))} 
-            className={styles.button} 
+            className={styles.button_move} 
             disabled={offset === 0}
           >
             ◀ Previous
           </button>
           <button 
             onClick={() => handleSearch(Number(offset) + Number(limit) || 4)} 
-            className={styles.button}
+            className={styles.button_move}
           >
             Next ▶
           </button>
